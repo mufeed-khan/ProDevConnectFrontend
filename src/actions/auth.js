@@ -19,7 +19,9 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token); // ✅ sets token to axios default headers
   }
   try {
-    const res = await axios.get('/api/auth' );
+    const res = await axios.get(
+      'https://prodevconnectbackend-4.onrender.com/api/auth'
+    );
 
     dispatch({
       type: USER_LOADED,
@@ -45,7 +47,11 @@ export const register =
     const body = JSON.stringify({ name, email, password });
 
     try {
-      const res = await axios.post('/api/users/register', body, config);
+      const res = await axios.post(
+        'https://prodevconnectbackend-4.onrender.com/api/users/register',
+        body,
+        config
+      );
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -80,7 +86,11 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const res = await axios.post('/api/auth/login', body, config);
+    const res = await axios.post(
+      'https://prodevconnectbackend-4.onrender.com/api/auth/login',
+      body,
+      config
+    );
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -88,7 +98,6 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     dispatch(loadUser()); // Load user after successful login
-    
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
